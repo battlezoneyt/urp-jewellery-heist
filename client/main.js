@@ -115,12 +115,3 @@ function drawMarker(pos) {
     );
 }
 
-const generateBlip = (cds) => {
-    const pointBlip = new alt.PointBlip(cds.x, cds.y, cds.z);
-    pointBlip.name = `point`;
-    pointBlip.sprite = 1;
-    pointBlip.color = 5;
-    pointBlip.shortRange = true;
-    pointBlip.route = true;
-    return pointBlip;
-};
