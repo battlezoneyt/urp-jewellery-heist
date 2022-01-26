@@ -2,17 +2,17 @@ import Core from 'urp-core';
 import * as natives from 'natives';
 import * as alt from 'alt-client';
 
-import { START_HEIST, COORDS_LIST, timeout } from '../shared/config';
+import { START_HEIST, COORDS_LIST } from '../shared/config';
 
 let isStarted = false;
 let cds = 0;
-let blip = null;
-let copscount = false;
 let robbed = false;
-let robberywait = false;
+
 
 alt.onServer('start:heist', () =>{
-    copscount = true;
+    isStarted = true;
+    alt.emit('notify', 'important', 'Jewel Heist', 'Jewel Heist Stated');
+    // Sends to all players.
 })
 
 
@@ -22,18 +22,7 @@ alt.on('keydown', (key) => {
     let diststartJob = alt.Player.local.pos.distanceTo(START_HEIST) < 2.5;
     let dist = alt.Player.local.pos.distanceTo(COORDS_LIST[cds]) < 0.5;
     if (key == 69 && diststartJob && !isStarted) {
-        if(!robberywait){
             alt.emitServer('copsAvailable');
-            alt.setTimeout(() => {
-                if(!copscount) {alt.emit('notify', 'important', 'Jewel Heist', 'No available Cops in the city'); return;}
-                isStarted = true
-                alt.emit('notify', 'important', 'Jewel Heist', 'Jewel Heist Stated');
-                // Sends to all players.
-            }, 500);
-        }else {
-            alt.emit('notify', 'important', 'Jewel Heist', 'Jewel Heist On Hold');
-            return;
-        }
     }
     if (key == 69 && isStarted && dist && !robbed) {
         robbed = true;
@@ -68,9 +57,6 @@ alt.everyTick(async () => {
         isStarted = false; 
         cds= 0;
         robberywait = true;
-        alt.setTimeout(() => {
-            robberywait = false;
-        }, timeout);
         return;
     }
         cds = cds+1;

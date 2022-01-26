@@ -2,14 +2,13 @@ import Core from 'urp-core';
 import * as alt from 'alt-server';
 import * as chat from 'urp-chat';
 
-import { MIN_COPS } from '../shared/config';
-
+import { MIN_COPS, timeout } from '../shared/config';
 alt.onClient('addHeist:reward', (source) => {
     Core.Money.addMoney(source, 'cash', 25);
     alt.emitClient(source, 'notify', 'success', 'payment', 'you received $25');
 });
 
-
+let robberywait = false;
 alt.onClient('copsAvailable', (source) => {
     let availablecops = 0;
     if (!source || !source.valid) {
@@ -20,9 +19,21 @@ alt.onClient('copsAvailable', (source) => {
         const playerjob = Core.Functions.getPlayerData(player, 'job');
         if (playerjob.name === "police" && playerjob.onDuty) availablecops = availablecops + 1;
     });
+
     if(availablecops >= MIN_COPS) {
-        chat.broadcast(`{5555AA}LAW & ORDER {FFFFFF}Jewel Heist Stated`);
-        alt.emitClient(source, 'start:heist');
+        if(!robberywait){
+            alt.log(robberywait);
+            chat.broadcast(`{5555AA}LAW & ORDER {FFFFFF}Jewel Heist Stated`);
+            if(!robberywait) alt.emitClient(source, 'start:heist');
+            robberywait = true;
+            alt.setTimeout(() => {
+                robberywait = false;
+            }, timeout);
+        }else {
+            alt.emitClient(source, 'notify', 'error', 'Jewel Heist', 'Jewel Heist On Hold, wait for cooldown.');
+            return;
+        }
+    }else {
+        alt.emitClient(source, 'notify', 'error', 'Jewel Heist', 'No available Cops in the city');
     }
 });
-
