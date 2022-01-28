@@ -1,35 +1,64 @@
-export const START_HEIST = {
-    x: -630.5,
-    y: -237.13,
-    z: 38.08,
-};
+import * as alt from 'alt';
 
-export const COORDS_LIST = [
-    { x: -626.83, y: -235.35, z: 38.05},
-    { x: -625.81, y: -234.7, z: 38.05 },
-    { x: -626.95, y: -233.14, z: 38.05 },
-    { x: -628.0, y: -233.86, z: 38.05 },
-    { x: -625.7, y: -237.8, z: 38.05 },
-    { x: -626.7, y: -238.58, z: 38.05 },
-    { x: -624.55, y: -231.06, z: 38.05 },
-    { x: -623.13, y: -232.94, z: 38.05 },
-    { x: -620.29, y: -234.44, z: 38.05 },
-    { x: -619.15, y: -233.66, z: 38.05 },
-    { x: -620.19, y: -233.44, z: 38.05 },
-    { x: -617.63, y: -230.58, z:38.05 },
-    { x: -618.33, y: -229.55, z:38.05 },
-    { x: -619.7, y: -230.33, z:38.05 },
-    { x: -620.95, y: -228.6, z: 38.05 },
-    { x: -619.79, y: -227.6, z: 38.05},
-    { x: -620.42, y: -226.6, z: 38.05},
-    { x: -623.94, y: -227.18, z: 38.05 },
-    { x: -624.91, y: -227.87, z: 38.05 },
-    { x: -623.94, y: -228.05, z:38.05 },
+// export const STORE_HEIST = [
+//     { x: -43.43, y: -1748.3, y: 29.42 , robbed: false},
+//     { x: -1478.94, y: -375.5, y: 39.16, robbed: false },
+//     { x: -1220.85, y: -916.05, y: 11.32, robbed: false },
+//     { x: -709.74, y: -904.15, y: 19.21, robbed: false },
+//     { x: 28.21, y: -1339.14, y: 29.49, robbed: false },
+//     { x: 1126.77, y: -980.1, y: 45.41, robbed: false },
+//     { x: 1159.46, y: -314.05, y: 69.2, robbed: false },
+//     { x: 378.17, y: 333.44, y: 103.56, robbed: false },
+//     { x: -1829.27, y: 798.76, y: 138.19, robbed: false },
+//     { x: -2959.64, y: 387.08, y: 14.04, robbed: false },
+//     { x: -3047.88, y: 585.61, y: 7.9, robbed: false },
+//     { x: -3250.02, y: 1004.43, y: 12.83, robbed: false },
+//     { x: 546.41, y: 2662.8, y: 42.15, robbed: false },
+//     { x: 1169.31, y: 2717.79, y: 37.15, robbed: false },
+//     { x: 2672.69, y: 3286.63, y: 55.24, robbed: false },
+//     { x: 1959.26, y: 3748.92, y: 32.34, robbed: false },
+//     { x: 1734.78, y: 6420.84, y: 35.03, robbed: false },
+//     { x: -168.40, y: 6318.80, y: 30.58, robbed: false },
+//     { x: 168.95, y: 6644.74, y: 31.70, robbed: false },
+// ];
+
+export const STOREHEIST_INTERACTIONS = [
+    {
+        x: -43.35,
+        y: -1748.36,
+        z: 29.41,
+        type: 'Store Robbery',
+        isServer: false,
+        eventName: 'storeheist:open',
+        blip: {
+            sprite: 156,
+            color: 1,
+        },
+        marker: {
+            type: 1,
+            color: new alt.RGBA(0, 181, 204, 200),
+        },
+        isrobbed: false,
+    },
+    {
+        x: -1478.72,
+        y: -375.16,
+        z: 39.15,
+        type: 'Store Robbery',
+        isServer: false,
+        eventName: 'storeheist:open',
+        blip: {
+            sprite: 156,
+            color: 1,
+        },
+        marker: {
+            type: 1,
+            color: new alt.RGBA(0, 181, 204, 200),
+        },
+        isrobbed: false,
+    },
 ];
 
-export const WHITELISTED_WEAPON = [
-{GetHashKey: 'weapon_compactrifle'},
-];
 
 export const MIN_COPS = 1;
 
